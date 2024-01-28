@@ -1,15 +1,14 @@
 version: '3.8'
 
 services:
-  mitmproxy:
+  mitmweb:
     image: mitmproxy/mitmproxy
     volumes:
       - type: bind
         source: ./dump.har
         target: /dump.har
-      - ./certs:/home/mitmproxy/.mitmproxy
-    # Можно было бы и reverse сделать только для edu но тогда на одном порту
-    # mitm.it не получится сделать через него удобно сертификаты ставить
-    command: mitmdump --set hardump=/dump.har
+      - ./config:/home/mitmproxy/.mitmproxy
+    command: mitmweb
     ports:
       - 8080:8080
+      - 127.0.0.1:8081:8081

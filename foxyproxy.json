@@ -23,6 +23,12 @@
         },
         {
           "type": "wildcard",
+          "title": "version",
+          "pattern": "https://edu.21-school.ru/static.js",
+          "active": true
+        },
+        {
+          "type": "wildcard",
           "title": "mitm",
           "pattern": "://mitm.it",
           "active": true

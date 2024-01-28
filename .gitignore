@@ -1,2 +1,9 @@
 certs
 *har
+
+__pycache__
+
+# Certificates
+*pem
+*p12
+*cer
