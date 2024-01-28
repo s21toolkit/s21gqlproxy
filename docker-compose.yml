@@ -4,11 +4,7 @@ services:
   mitmweb:
     image: mitmproxy/mitmproxy
     volumes:
-      - type: bind
-        source: ./dump.har
-        target: /dump.har
       - ./config:/home/mitmproxy/.mitmproxy
-    command: mitmweb
+    command: mitmdump
     ports:
       - 8080:8080
-      - 127.0.0.1:8081:8081
