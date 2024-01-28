@@ -11,7 +11,7 @@ class GQLHarLogEntry:
 		self.opName = opName
 
 	def save(self, folder: Path) -> None:
-		folder.joinpath(f'{self.opName}.json').write_text(self.__str__())
+		folder.joinpath(f'{self.opName}.har').write_text(self.__str__())
 
 	def __str__(self):
 		return dumps({
@@ -44,6 +44,11 @@ class Extractor:
 		self.QUERIES = set()
 		self.MUTATIONS = set()
 
+		for e in self.QUERIES_DIR.iterdir():
+			self.MUTATIONS.add(e.name.split('.')[0])
+		for e in self.MUTATIONS_DIR.iterdir():
+			self.MUTATIONS.add(e.name.split('.')[0])
+
 		self.ROOT_DIR.mkdir(exist_ok=True)
 		self.QUERIES_DIR.mkdir(exist_ok=True)
 		self.MUTATIONS_DIR.mkdir(exist_ok=True)
@@ -59,10 +64,10 @@ class Extractor:
 				res = flow.response.content.decode()
 				if req['query'].startswith('query') and not req['operationName'] in self.QUERIES:
 					self.QUERIES.add(req['operationName'])
-					GQLHarLogEntry(req['operationName'], req, res).save(self.QUERIES_DIR)
+					GQLHarLogEntry(req['operationName'], rawReq, res).save(self.QUERIES_DIR)
 				elif req['query'].startswith('mutation') and not req['operationName'] in self.MUTATIONS:
 					self.MUTATIONS.add(req['operationName'])
-					GQLHarLogEntry(req['operationName'], req, res).save(self.MUTATIONS_DIR)
+					GQLHarLogEntry(req['operationName'], rawReq, res).save(self.MUTATIONS_DIR)
 		elif flow.request.url.endswith('/static.js'):
 				if flow.request.raw_content:
 					self.ROOT_DIR.joinpath('static.js').write_bytes(flow.request.raw_content)
