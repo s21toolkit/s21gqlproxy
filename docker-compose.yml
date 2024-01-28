@@ -1,7 +1,7 @@
 version: '3.8'
 
 services:
-  mitmweb:
+  mitmproxy:
     image: mitmproxy/mitmproxy
     volumes:
       - ./config:/home/mitmproxy/.mitmproxy
