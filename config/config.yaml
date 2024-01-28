@@ -12,6 +12,8 @@ scripts:
 web_port: 8081
 web_host: 0.0.0.0
 
+block_global: false
+
 rawtcp: false
 server_replay_refresh: false
 websocket: false
