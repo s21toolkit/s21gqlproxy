@@ -3,7 +3,16 @@ certs
 
 __pycache__
 
+config/dump
+
 # Certificates
 *pem
 *p12
 *cer
+
+# Python
+lib
+lib64
+bin
+.vscode
+pyvenv.cfg
