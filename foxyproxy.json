@@ -29,7 +29,7 @@
         },
         {
           "type": "wildcard",
-          "title": "mitm",
+          "title": "certificate",
           "pattern": "://mitm.it",
           "active": true
         }
